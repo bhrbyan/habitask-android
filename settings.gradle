@@ -16,3 +16,4 @@ rootProject.name = "Habitask"
 include ':app'
 include ':features:feature-task'
 include ':features:feature-category'
+include ':common:ui'
