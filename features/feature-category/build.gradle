@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace 'id.habitask.feature.task'
+    namespace 'id.habitask.feature.category'
     compileSdk 33
 
     defaultConfig {
