@@ -14,4 +14,3 @@ dependencyResolutionManagement {
 }
 rootProject.name = "Habitask"
 include ':app'
-include ':features:task'
