@@ -32,5 +32,5 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun HabitaskApp() {
-    TaskList(title = R.string.app_name)
+    TaskList()
 }
