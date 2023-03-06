@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace 'id.habitask.data.category'
+    namespace 'id.habitask.data.core'
     compileSdk 33
 
     defaultConfig {
@@ -32,10 +32,11 @@ android {
 
 dependencies {
 
+    implementation project(":data:data-category")
+
     /* Room */
     implementation "androidx.room:room-runtime:$room_version"
     annotationProcessor "androidx.room:room-compiler:$room_version"
-
 
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.appcompat:appcompat:1.6.1'
