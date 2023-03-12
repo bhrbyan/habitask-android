@@ -1,26 +1,21 @@
-package id.habitask
+package id.habitask.feature.category.list
 
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import dagger.hilt.android.AndroidEntryPoint
-import id.habitask.feature.category.router.CategoryIntentRouter
-import id.habitask.feature.task.TaskListScreen
+import androidx.compose.ui.res.stringResource
+import id.habitask.feature.category.R
+import id.habitask.ui.ToolbarNavigation
 import id.habitask.ui.theme.HabitaskTheme
-import javax.inject.Inject
 
-@AndroidEntryPoint
-class MainActivity : ComponentActivity() {
-
-    @Inject
-    lateinit var categoryIntentRouter: CategoryIntentRouter
+class CategoryListActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,26 +25,25 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    HabitaskApp(
-                        onOpenMoreCategories = {
-                            startActivity(
-                                categoryIntentRouter.getIntentCategoryList(this)
-                            )
+                    CategoryListPage(
+                        onClickNavigationIcon = {
+                            onBackPressedDispatcher.onBackPressed()
                         }
                     )
                 }
             }
         }
     }
+
 }
 
 @Composable
-fun HabitaskApp(
-    onOpenMoreCategories: () -> Unit
+fun CategoryListPage(
+    onClickNavigationIcon: () -> Unit
 ) {
-    TaskListScreen(
-        onOpenMoreCategories = {
-            onOpenMoreCategories()
+    CategoryListScreen(
+        onClickNavigationIcon = {
+            onClickNavigationIcon()
         }
     )
 }

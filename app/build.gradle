@@ -51,6 +51,7 @@ android {
 dependencies {
 
     implementation project(":common:storage")
+    implementation project(":common:ui")
     implementation project(":features:feature-task")
     implementation project(":features:feature-category")
 

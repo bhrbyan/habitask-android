@@ -2,6 +2,7 @@ package id.habitask.ui
 
 import androidx.annotation.StringRes
 import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
 import androidx.compose.material.icons.Icons
@@ -28,19 +29,24 @@ fun Toolbar(
 @Composable
 fun ToolbarNavigation(
     @StringRes title: Int,
+    navigationIcon: ImageVector,
+    onClickNavigationIcon: () -> Unit,
     modifier: Modifier = Modifier,
-    navigationIcon: ImageVector? = null
 ) {
     TopAppBar(
         title = {
             Text(text = stringResource(id = title))
         },
         navigationIcon = {
-            navigationIcon?.let {
+            IconButton(
+                onClick = {
+                    onClickNavigationIcon()
+                }
+            ) {
                 Icon(imageVector = navigationIcon, contentDescription = null)
             }
         },
-        modifier = modifier
+        modifier = modifier,
     )
 }
 
@@ -55,6 +61,7 @@ fun PreviewToolbar() {
 fun PreviewToolbarNavigation() {
     ToolbarNavigation(
         title = androidx.compose.ui.R.string.close_drawer,
-        navigationIcon = Icons.Default.ArrowBack
+        navigationIcon = Icons.Default.ArrowBack,
+        onClickNavigationIcon = {}
     )
 }
