@@ -6,14 +6,16 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import id.habitask.feature.task.TaskList
+import dagger.hilt.android.AndroidEntryPoint
+import id.habitask.feature.task.TaskListScreen
 import id.habitask.ui.theme.HabitaskTheme
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -32,5 +34,11 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun HabitaskApp() {
-    TaskList()
+    TaskListScreen()
+}
+
+@Preview
+@Composable
+fun PreviewHabitaskApp() {
+    HabitaskApp()
 }

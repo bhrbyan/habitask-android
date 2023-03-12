@@ -7,10 +7,10 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
-import id.habitask.data.category.database.dao.CategoryDao
+import id.habitask.database.dao.CategoryDao
 import id.habitask.data.category.repository.CategoryDataSource
 import id.habitask.data.category.repository.CategoryRepository
-import id.habitask.data.core.database.AppDatabase
+import id.habitask.database.AppDatabase
 import javax.inject.Singleton
 
 @Module
