@@ -2,22 +2,16 @@ package id.habitask.feature.task
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.AddCircle
-import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
-import id.habitask.data.category.helper.CategoryHelper
-import id.habitask.feature.category.CategoryTabList
-import id.habitask.storage.AppSettingSharedPref
+import id.habitask.feature.category.tab.CategoryTabList
 import id.habitask.ui.Toolbar
 import id.habitask.ui.R
 

@@ -11,10 +11,12 @@ import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import dagger.hilt.android.AndroidEntryPoint
 import id.habitask.feature.category.R
 import id.habitask.ui.ToolbarNavigation
 import id.habitask.ui.theme.HabitaskTheme
 
+@AndroidEntryPoint
 class CategoryListActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,7 +27,7 @@ class CategoryListActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    CategoryListPage(
+                    CategoryListScreen(
                         onClickNavigationIcon = {
                             onBackPressedDispatcher.onBackPressed()
                         }
@@ -35,15 +37,4 @@ class CategoryListActivity : ComponentActivity() {
         }
     }
 
-}
-
-@Composable
-fun CategoryListPage(
-    onClickNavigationIcon: () -> Unit
-) {
-    CategoryListScreen(
-        onClickNavigationIcon = {
-            onClickNavigationIcon()
-        }
-    )
 }

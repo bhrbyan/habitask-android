@@ -30,7 +30,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    HabitaskApp(
+                    TaskListScreen(
                         onOpenMoreCategories = {
                             startActivity(
                                 categoryIntentRouter.getIntentCategoryList(this)
@@ -41,15 +41,4 @@ class MainActivity : ComponentActivity() {
             }
         }
     }
-}
-
-@Composable
-fun HabitaskApp(
-    onOpenMoreCategories: () -> Unit
-) {
-    TaskListScreen(
-        onOpenMoreCategories = {
-            onOpenMoreCategories()
-        }
-    )
 }

@@ -1,9 +1,8 @@
-package id.habitask.feature.task
+package id.habitask.feature.category.list
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import id.habitask.data.category.model.Category
 import id.habitask.data.category.usecase.GetCategoriesUseCase
 import id.habitask.network.state.Result
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -13,27 +12,27 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class TaskListViewModel @Inject constructor(
+class CategoryListViewModel @Inject constructor(
     private val getCategoriesUseCase: GetCategoriesUseCase
 ) : ViewModel() {
 
-    private val _viewState = MutableStateFlow(TaskListViewState())
-    val viewState: StateFlow<TaskListViewState>
+    private val _viewState = MutableStateFlow(CategoryListViewState())
+    val viewState: StateFlow<CategoryListViewState>
         get() = _viewState.asStateFlow()
-
-    private fun updateViewState(viewState: TaskListViewState) {
-        _viewState.value = viewState
-    }
 
     init {
         getCategories()
     }
 
+    private fun updateViewState(viewState: CategoryListViewState) {
+        _viewState.value = viewState
+    }
+
     private fun getCategories() {
         viewModelScope.launch {
             when (val result = getCategoriesUseCase.invoke()) {
-                is Result.Success<List<Category>> -> {
-                    updateViewState(TaskListViewState(result.data))
+                is Result.Success -> {
+                    updateViewState(CategoryListViewState(result.data))
                 }
                 is Result.Failed -> {
                     // TODO: Do something
@@ -41,5 +40,4 @@ class TaskListViewModel @Inject constructor(
             }
         }
     }
-
 }

@@ -43,6 +43,7 @@ android {
 dependencies {
 
     implementation project(":common:ui")
+    implementation project(":common:network")
     implementation project(":data:data-category")
 
     /* Coroutines */
@@ -51,6 +52,9 @@ dependencies {
     /* Hilt */
     implementation "com.google.dagger:hilt-android:2.44"
     kapt "com.google.dagger:hilt-compiler:2.44"
+
+    /* ViewModel */
+    implementation "androidx.lifecycle:lifecycle-viewmodel-compose:2.5.1"
 
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.3.1'

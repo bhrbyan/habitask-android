@@ -1,4 +1,4 @@
-package id.habitask.feature.category
+package id.habitask.feature.category.tab
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyRow
