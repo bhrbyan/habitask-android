@@ -6,10 +6,11 @@ data class Category(
     val name: String,
     val hexColor: String,
     val position: Int,
-    val visible: Boolean,
-    val deletable: Boolean = true
+    var visible: Boolean,
+    val deletable: Boolean = true,
+    val id: Long = 0
 ) {
-    fun mapToEntity(): CategoryEntity {
-        return CategoryEntity(name, hexColor, position, visible, deletable)
+    fun mapToEntity(id: Long = 0): CategoryEntity {
+        return CategoryEntity(id, name, hexColor, position, visible, deletable)
     }
 }

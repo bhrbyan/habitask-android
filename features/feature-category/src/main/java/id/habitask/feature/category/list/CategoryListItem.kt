@@ -1,8 +1,8 @@
 package id.habitask.feature.category.list
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
@@ -19,6 +19,7 @@ import id.habitask.ui.R
 @Composable
 fun CategoryListItem(
     category: Category,
+    onUpdateVisibility: (category: Category) -> Unit,
     modifier: Modifier = Modifier
 ) {
     Row(
@@ -36,8 +37,12 @@ fun CategoryListItem(
                 .padding(horizontal = 16.dp)
         )
         Image(
-            painter = painterResource(id = R.drawable.ic_visibility_24),
-            contentDescription = null
+            painter = if (category.visible) painterResource(id = R.drawable.ic_visibility_24)
+            else painterResource(id = R.drawable.ic_visibility_off_24),
+            contentDescription = null,
+            modifier = Modifier.clickable {
+                onUpdateVisibility(category)
+            }
         )
     }
 }
@@ -45,5 +50,8 @@ fun CategoryListItem(
 @Preview(showBackground = true)
 @Composable
 fun PreviewCategoryListItem() {
-    CategoryListItem(category = Category("All", "", 0, true))
+    CategoryListItem(
+        category = Category("All", "", 0, true),
+        onUpdateVisibility = {}
+    )
 }

@@ -13,11 +13,17 @@ import id.habitask.data.category.model.Category
 @Composable
 fun CategoryList(
     categories: List<Category>,
+    onUpdateVisibility: (category: Category) -> Unit,
     modifier: Modifier = Modifier
 ) {
     LazyColumn(modifier) {
         items(categories) { category ->
-            CategoryListItem(category = category)
+            CategoryListItem(
+                category = category,
+                onUpdateVisibility = { selectedCategory ->
+                    onUpdateVisibility(selectedCategory)
+                }
+            )
             Divider(
                 modifier = Modifier.padding(horizontal = 20.dp)
             )
@@ -34,6 +40,7 @@ fun PreviewCategoryList() {
             Category("Personal", "", 1, true, false),
             Category("Work", "", 2, true, false),
             Category("Others", "", 3, true, false),
-        )
+        ),
+        onUpdateVisibility = {}
     )
 }

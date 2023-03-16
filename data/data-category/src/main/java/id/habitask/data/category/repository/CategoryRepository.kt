@@ -17,7 +17,7 @@ class CategoryRepository @Inject constructor(
             try {
                 val categories = categoryDao.getCategories().map { categoryEntity ->
                     with(categoryEntity) {
-                        Category(name, hexColor, position, visible, deletable)
+                        Category(name, hexColor, position, visible, deletable, id)
                     }
                 }
 
@@ -34,6 +34,22 @@ class CategoryRepository @Inject constructor(
                 categories.forEach { category ->
                     categoryDao.saveCategory(category.mapToEntity())
                 }
+
+                Result.Success(true)
+            } catch (e: Exception) {
+                Result.Failed(e)
+            }
+        }
+    }
+
+    override suspend fun updateCategory(category: Category): Result<Boolean> {
+        return withContext(appDispatcher.io) {
+            try {
+                val updatedCategory = category.copy(visible = !category.visible)
+
+                categoryDao.updateCategory(
+                    updatedCategory.mapToEntity(id = category.id)
+                )
 
                 Result.Success(true)
             } catch (e: Exception) {

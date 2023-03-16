@@ -6,5 +6,6 @@ import id.habitask.network.state.Result
 interface CategoryDataSource {
     suspend fun getCategories(): Result<List<Category>>
     suspend fun saveCategories(categories: List<Category>): Result<Boolean>
+    suspend fun updateCategory(category: Category): Result<Boolean>
 
 }
