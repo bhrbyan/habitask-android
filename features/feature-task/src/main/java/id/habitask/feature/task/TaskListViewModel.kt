@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import id.habitask.data.category.model.Category
+import id.habitask.data.category.model.CategoryGetRequest
 import id.habitask.data.category.usecase.GetCategoriesUseCase
 import id.habitask.network.state.Result
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -31,7 +32,7 @@ class TaskListViewModel @Inject constructor(
 
     private fun getCategories() {
         viewModelScope.launch {
-            when (val result = getCategoriesUseCase.invoke()) {
+            when (val result = getCategoriesUseCase.invoke(CategoryGetRequest.VisibleOnly)) {
                 is Result.Success<List<Category>> -> {
                     updateViewState(TaskListViewState(result.data))
                 }

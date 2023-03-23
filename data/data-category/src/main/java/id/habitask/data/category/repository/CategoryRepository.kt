@@ -1,6 +1,7 @@
 package id.habitask.data.category.repository
 
 import id.habitask.data.category.model.Category
+import id.habitask.data.category.model.CategoryGetRequest
 import id.habitask.database.dao.CategoryDao
 import id.habitask.network.dispatcher.AppDispatcher
 import id.habitask.network.state.Result
@@ -12,13 +13,18 @@ class CategoryRepository @Inject constructor(
     private val categoryDao: CategoryDao
 ) : CategoryDataSource {
 
-    override suspend fun getCategories(): Result<List<Category>> {
+    override suspend fun getCategories(request: CategoryGetRequest): Result<List<Category>> {
         return withContext(appDispatcher.io) {
             try {
-                val categories = categoryDao.getCategories().map { categoryEntity ->
-                    with(categoryEntity) {
-                        Category(name, hexColor, position, visible, deletable, id)
+                val categories = when (request) {
+                    is CategoryGetRequest.All -> {
+                        categoryDao.getCategories()
                     }
+                    is CategoryGetRequest.VisibleOnly -> {
+                        categoryDao.getCategories().filter { it.visible }
+                    }
+                }.map {
+                    Category(it.name, it.hexColor, it.position, it.visible, it.deletable, it.id)
                 }
 
                 Result.Success(categories)

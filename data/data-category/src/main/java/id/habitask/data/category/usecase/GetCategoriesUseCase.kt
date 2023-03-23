@@ -2,6 +2,7 @@ package id.habitask.data.category.usecase
 
 import id.habitask.data.category.helper.CategoryHelper
 import id.habitask.data.category.model.Category
+import id.habitask.data.category.model.CategoryGetRequest
 import id.habitask.data.category.repository.CategoryDataSource
 import id.habitask.network.state.Result
 import id.habitask.storage.AppSettingSharedPref
@@ -14,13 +15,13 @@ class GetCategoriesUseCase @Inject constructor(
     private val categoryHelper: CategoryHelper
 ) {
 
-    suspend operator fun invoke(): Result<List<Category>> {
+    suspend operator fun invoke(request: CategoryGetRequest): Result<List<Category>> {
         return if (appSharedPref.firstTimeUser) {
             appSharedPref.firstTimeUser = false
 
             syncCategoriesUseCase.invoke(categoryHelper.getDefaultCategories())
         } else {
-            categoryRepository.getCategories()
+            categoryRepository.getCategories(request)
         }
     }
 

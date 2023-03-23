@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import id.habitask.data.category.model.Category
+import id.habitask.data.category.model.CategoryGetRequest
 import id.habitask.data.category.usecase.GetCategoriesUseCase
 import id.habitask.data.category.usecase.UpdateThenGetCategoriesUseCase
 import id.habitask.feature.category.ui.list.state.CategoryListViewState
@@ -31,7 +32,7 @@ class CategoryListViewModel @Inject constructor(
 
     private fun getCategories() {
         viewModelScope.launch {
-            when (val result = getCategoriesUseCase.invoke()) {
+            when (val result = getCategoriesUseCase.invoke(CategoryGetRequest.All)) {
                 is Result.Success -> {
                     _viewState.value = CategoryListViewState(result.data)
                 }
