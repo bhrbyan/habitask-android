@@ -1,4 +1,4 @@
-package id.habitask.feature.category.list
+package id.habitask.feature.category.ui.list
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -6,7 +6,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import id.habitask.data.category.model.Category
 import id.habitask.data.category.usecase.GetCategoriesUseCase
 import id.habitask.data.category.usecase.UpdateThenGetCategoriesUseCase
-import id.habitask.feature.category.list.state.CategoryListViewState
+import id.habitask.feature.category.ui.list.state.CategoryListViewState
 import id.habitask.network.state.Result
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

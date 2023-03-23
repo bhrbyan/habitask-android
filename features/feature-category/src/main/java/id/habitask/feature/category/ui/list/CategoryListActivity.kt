@@ -1,4 +1,4 @@
-package id.habitask.feature.category.list
+package id.habitask.feature.category.ui.list
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity

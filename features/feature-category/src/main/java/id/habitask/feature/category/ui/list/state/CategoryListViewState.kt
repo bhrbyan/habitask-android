@@ -1,4 +1,4 @@
-package id.habitask.feature.category.list.state
+package id.habitask.feature.category.ui.list.state
 
 import id.habitask.data.category.model.Category
 

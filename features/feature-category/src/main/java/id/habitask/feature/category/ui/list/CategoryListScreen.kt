@@ -1,4 +1,4 @@
-package id.habitask.feature.category.list
+package id.habitask.feature.category.ui.list
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material.icons.Icons

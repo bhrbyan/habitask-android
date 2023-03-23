@@ -1,4 +1,4 @@
-package id.habitask.feature.category.list
+package id.habitask.feature.category.ui.list
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable

@@ -2,7 +2,7 @@ package id.habitask.feature.category.router
 
 import android.content.Context
 import android.content.Intent
-import id.habitask.feature.category.list.CategoryListActivity
+import id.habitask.feature.category.ui.list.CategoryListActivity
 
 internal class CategoryIntentRouterImpl : CategoryIntentRouter {
 
