@@ -12,12 +12,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import id.habitask.ui.R
 
 @Composable
-fun TaskBottomSheetScreen(
+fun TaskBottomSheetFormScreen(
     taskValue: String,
-    onChangeTaskValue: (String) -> Unit
+    onChangeTaskValue: (String) -> Unit,
+    viewModel: TaskBottomSheetFormViewModel = viewModel()
 ) {
     Row(
         modifier = Modifier.padding(horizontal = 20.dp, vertical = 16.dp)
@@ -42,7 +44,7 @@ fun TaskBottomSheetScreen(
                 MaterialTheme.colors.secondary,
             onClick = {
                 if (taskValue.isNotEmpty()) {
-                    /*TODO*/
+                    viewModel.saveTask(taskValue)
                 }
             }
         ) {

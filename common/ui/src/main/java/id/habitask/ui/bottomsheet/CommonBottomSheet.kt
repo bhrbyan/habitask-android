@@ -7,7 +7,6 @@ import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 
 @OptIn(ExperimentalMaterialApi::class)
@@ -22,12 +21,10 @@ fun BottomSheet(
         sheetContent = {
             sheetContent()
         },
-        sheetPeekHeight = 80.dp,
+        sheetPeekHeight = 90.dp,
         modifier = modifier,
         sheetElevation = BottomSheetScaffoldDefaults.SheetElevation,
-        sheetShape = CircleShape.copy(bottomEnd = CornerSize(0.dp), bottomStart = CornerSize(0.dp)),
-        sheetBackgroundColor = Color.Yellow,
-        sheetGesturesEnabled = false
+        sheetShape = CircleShape.copy(bottomEnd = CornerSize(0.dp), bottomStart = CornerSize(0.dp))
     ) {
         Surface(
             modifier = Modifier
