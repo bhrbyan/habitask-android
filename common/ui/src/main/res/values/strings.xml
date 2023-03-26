@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <string name="app_name">Habitask</string>
+  <string name="app_button_add">Add</string>
+
+  <!-- Task Bottom Sheet -->
+  <string name="task_bottom_sheet_placeholder">Add Task</string>
 </resources>

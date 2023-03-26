@@ -2,11 +2,13 @@ package id.habitask.ui.bottomsheet
 
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
-import kotlinx.coroutines.launch
+import androidx.compose.ui.unit.dp
+import id.habitask.ui.theme.Shapes
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
@@ -15,33 +17,13 @@ fun BottomSheet(
     screenContent: @Composable () -> Unit,
     sheetContent: @Composable () -> Unit
 ) {
-    val scaffoldState = rememberBottomSheetScaffoldState(
-        bottomSheetState = rememberBottomSheetState(BottomSheetValue.Collapsed)
-    )
-    val scope = rememberCoroutineScope()
 
     BottomSheetScaffold(
-        scaffoldState = scaffoldState,
-        sheetContent = {
-            sheetContent()
-        },
-        sheetPeekHeight = BottomSheetScaffoldDefaults.SheetPeekHeight,
+        sheetContent = { sheetContent() },
+        sheetPeekHeight = 90.dp,
         modifier = modifier,
         sheetElevation = BottomSheetScaffoldDefaults.SheetElevation,
-        sheetShape = MaterialTheme.shapes.small,
-        floatingActionButton = {
-            FloatingActionButton(
-                onClick = {
-                    scope.launch {
-                        scaffoldState.bottomSheetState.apply {
-                            if (isCollapsed) expand() else collapse()
-                        }
-                    }
-                }
-            ) {
-                Text(text = "Add")
-            }
-        }
+        sheetShape = CircleShape.copy(bottomEnd = CornerSize(0.dp), bottomStart = CornerSize(0.dp)),
     ) {
         Surface(
             modifier = Modifier
