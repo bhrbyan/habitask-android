@@ -33,9 +33,7 @@ class MainActivity : ComponentActivity() {
                             cutoutShape = MaterialTheme.shapes.small.copy(
                                 CornerSize(50.dp)
                             )
-                        ) {
-                            Text(text = resources.getString(id.habitask.ui.R.string.app_name))
-                        }
+                        ) {}
                     },
                     floatingActionButton = {
                         FloatingActionButton(onClick = { /*TODO*/ }) {
@@ -45,7 +43,8 @@ class MainActivity : ComponentActivity() {
                             )
                         }
                     },
-                    isFloatingActionButtonDocked = true
+                    isFloatingActionButtonDocked = true,
+                    floatingActionButtonPosition = FabPosition.Center
                 ) {
                     Surface(
                         modifier = Modifier
