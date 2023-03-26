@@ -1,6 +1,7 @@
 package id.habitask.feature.category.tab
 
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
@@ -17,7 +18,7 @@ fun CategoryTabItem(
     Surface(
         modifier = modifier,
         color = MaterialTheme.colors.primary,
-        shape = MaterialTheme.shapes.medium
+        shape = CircleShape
     ) {
         Text(
             text = name,

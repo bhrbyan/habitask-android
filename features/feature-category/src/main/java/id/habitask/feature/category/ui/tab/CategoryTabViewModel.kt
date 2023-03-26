@@ -1,4 +1,4 @@
-package id.habitask.feature.task
+package id.habitask.feature.category.ui.tab
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -14,15 +14,15 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class TaskListViewModel @Inject constructor(
+class CategoryTabViewModel @Inject constructor(
     private val getCategoriesUseCase: GetCategoriesUseCase
 ) : ViewModel() {
 
-    private val _viewState = MutableStateFlow(TaskListViewState())
-    val viewState: StateFlow<TaskListViewState>
+    private val _viewState = MutableStateFlow(CategoryTabViewState())
+    val viewState: StateFlow<CategoryTabViewState>
         get() = _viewState.asStateFlow()
 
-    private fun updateViewState(viewState: TaskListViewState) {
+    private fun updateViewState(viewState: CategoryTabViewState) {
         _viewState.value = viewState
     }
 
@@ -34,7 +34,7 @@ class TaskListViewModel @Inject constructor(
         viewModelScope.launch {
             when (val result = getCategoriesUseCase.invoke(CategoryGetRequest.VisibleOnly)) {
                 is Result.Success<List<Category>> -> {
-                    updateViewState(TaskListViewState(result.data))
+                    updateViewState(CategoryTabViewState(result.data))
                 }
                 is Result.Failed -> {
                     // TODO: Do something
