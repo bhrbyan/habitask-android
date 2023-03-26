@@ -21,11 +21,7 @@ class CategoryListActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    CategoryListScreen(
-                        onClickNavigationIcon = {
-                            onBackPressedDispatcher.onBackPressed()
-                        }
-                    )
+                    CategoryListScreen()
                 }
             }
         }
