@@ -3,29 +3,49 @@ package id.habitask
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.Column
+import androidx.compose.material.Text
+import androidx.compose.material.rememberBottomSheetScaffoldState
+import androidx.compose.runtime.rememberCoroutineScope
 import dagger.hilt.android.AndroidEntryPoint
-import id.habitask.feature.category.router.CategoryIntentRouter
 import id.habitask.feature.task.TaskListScreen
-import id.habitask.ui.appbar.BottomAppBarWithFloatingActionButton
+import id.habitask.ui.R
+import id.habitask.ui.appbar.TopAppBar
+import id.habitask.ui.bottomsheet.BottomSheet
 import id.habitask.ui.theme.HabitaskTheme
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
-
-    @Inject
-    lateinit var categoryIntentRouter: CategoryIntentRouter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             HabitaskTheme {
-                BottomAppBarWithFloatingActionButton(
-                    onClickFloatingActionButton = {
-                        // Open Bottom Sheet
+                BottomSheet(
+                    screenContent = {
+                        Column {
+                            TopAppBar(title = R.string.app_name)
+                            TaskListScreen()
+                        }
                     },
-                    content = {
-                        TaskListScreen()
+                    sheetContent = {
+                        Text(text = "Bottom Sheet Content")
+                        Text(text = "Bottom Sheet Content")
+                        Text(text = "Bottom Sheet Content")
+                        Text(text = "Bottom Sheet Content")
+                        Text(text = "Bottom Sheet Content")
+                        Text(text = "Bottom Sheet Content")
+                        Text(text = "Bottom Sheet Content")
+                        Text(text = "Bottom Sheet Content")
+                        Text(text = "Bottom Sheet Content")
+                        Text(text = "Bottom Sheet Content")
+                        Text(text = "Bottom Sheet Content")
+                        Text(text = "Bottom Sheet Content")
+                        Text(text = "Bottom Sheet Content")
+                        Text(text = "Bottom Sheet Content")
+                        Text(text = "Bottom Sheet Content")
+                        Text(text = "Bottom Sheet Content")
+                        Text(text = "Bottom Sheet Content")
                     }
                 )
             }
