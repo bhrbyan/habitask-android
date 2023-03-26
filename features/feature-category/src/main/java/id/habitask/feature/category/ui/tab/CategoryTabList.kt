@@ -14,7 +14,7 @@ fun CategoryTabList(
     categories: List<Category>,
     modifier: Modifier = Modifier
 ) {
-    LazyRow(modifier = modifier.padding(horizontal = 4.dp)) {
+    LazyRow(modifier = modifier.padding(horizontal = 16.dp, vertical = 4.dp)) {
         items(categories) { category ->
             CategoryTabItem(
                 name = category.name,
