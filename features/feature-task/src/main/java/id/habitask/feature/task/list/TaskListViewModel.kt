@@ -3,9 +3,10 @@ package id.habitask.feature.task.list
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import id.habitask.data.task.model.Task
-import id.habitask.data.task.usecase.CheckTaskUseCase
+import id.habitask.data.task.model.TaskStatus
+import id.habitask.data.task.usecase.CheckAndGetLatestTaskUseCase
 import id.habitask.data.task.usecase.GetTasksUseCase
+import id.habitask.feature.task.list.state.TaskListViewState
 import id.habitask.network.state.Result
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -17,11 +18,11 @@ import javax.inject.Inject
 @HiltViewModel
 class TaskListViewModel @Inject constructor(
     private val getTasksUseCase: GetTasksUseCase,
-    private val checkTaskUseCase: CheckTaskUseCase
+    private val checkAndGetLatestTaskUseCase: CheckAndGetLatestTaskUseCase
 ) : ViewModel() {
 
-    private val _viewState = MutableStateFlow(emptyList<Task>())
-    val viewState: StateFlow<List<Task>> = _viewState.asStateFlow()
+    private val _viewState = MutableStateFlow(TaskListViewState())
+    val viewState: StateFlow<TaskListViewState> = _viewState.asStateFlow()
 
     init {
         getTasks()
@@ -29,9 +30,9 @@ class TaskListViewModel @Inject constructor(
 
     private fun getTasks() {
         viewModelScope.launch {
-            when (val result = getTasksUseCase.invoke()) {
+            when (val result = getTasksUseCase.invoke(TaskStatus.Unchecked)) {
                 is Result.Success -> {
-                    _viewState.value = result.data
+                    _viewState.value = TaskListViewState(result.data)
                 }
                 is Result.Failed -> {
                     // TODO
@@ -41,20 +42,20 @@ class TaskListViewModel @Inject constructor(
     }
 
     fun onCheck(id: Long, check: Boolean) {
-        val checkedTask = _viewState.value.find { it.id == id }
-        val checkedTaskPosition = _viewState.value.indexOf(checkedTask)
-        val updatedTask = _viewState.value.drop(checkedTaskPosition)
         viewModelScope.launch {
-            when (checkTaskUseCase.invoke(id, check)) {
+            when (val result = checkAndGetLatestTaskUseCase.invoke(id, check)) {
                 is Result.Success -> {
                     _viewState.update {
-                        updatedTask
+                        it.copy(
+                            tasks = result.data
+                        )
                     }
                 }
                 is Result.Failed -> {
                     TODO()
                 }
             }
+
         }
     }
 

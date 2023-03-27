@@ -1,6 +1,7 @@
 package id.habitask.data.task.repository
 
 import id.habitask.data.task.model.Task
+import id.habitask.data.task.model.TaskStatus
 import id.habitask.database.dao.TaskDao
 import id.habitask.network.dispatcher.AppDispatcher
 import id.habitask.network.state.Result
@@ -23,12 +24,19 @@ class TaskRepository @Inject constructor(
         }
     }
 
-    override suspend fun getTasks(): Result<List<Task>> {
+    override suspend fun getTasks(taskStatus: TaskStatus): Result<List<Task>> {
         return withContext(dispatcher.io) {
             try {
-                val tasks = taskDao.getTasks().map {
-                    Task(it.id, it.name, it.categoryId, it.checked)
-                }
+                val tasks = taskDao.getTasks()
+                    .filter {
+                        when (taskStatus) {
+                            TaskStatus.Checked -> it.checked
+                            TaskStatus.Unchecked -> it.checked.not()
+                        }
+                    }
+                    .map {
+                        Task(it.id, it.name, it.categoryId, it.checked)
+                    }
 
                 Result.Success(tasks)
             } catch (e: Exception) {

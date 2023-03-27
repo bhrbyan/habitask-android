@@ -17,7 +17,7 @@ fun TaskList(
     }
 
     LazyColumn(modifier) {
-        items(viewState) { task ->
+        items(viewState.tasks) { task ->
             TaskListItem(
                 taskName = task.name,
                 checked = checked,
