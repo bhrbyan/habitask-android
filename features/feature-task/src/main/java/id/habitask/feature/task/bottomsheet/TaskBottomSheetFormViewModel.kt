@@ -23,7 +23,7 @@ class TaskBottomSheetFormViewModel @Inject constructor(
 
     fun saveTask(taskValue: String) {
         viewModelScope.launch {
-            when (val result = saveTaskUseCase.invoke(Task(0, taskValue, 1))) {
+            when (val result = saveTaskUseCase.invoke(Task(0, taskValue, 1, false))) {
                 is Result.Success -> {
                     _viewState.value = result.data
                 }

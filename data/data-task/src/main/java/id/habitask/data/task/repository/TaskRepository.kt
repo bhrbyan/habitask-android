@@ -27,10 +27,22 @@ class TaskRepository @Inject constructor(
         return withContext(dispatcher.io) {
             try {
                 val tasks = taskDao.getTasks().map {
-                    Task(it.id, it.name, it.categoryId)
+                    Task(it.id, it.name, it.categoryId, it.checked)
                 }
 
                 Result.Success(tasks)
+            } catch (e: Exception) {
+                Result.Failed(e)
+            }
+        }
+    }
+
+    override suspend fun checkTask(id: Long, checked: Boolean): Result<Boolean> {
+        return withContext(dispatcher.io) {
+            try {
+                taskDao.checkTask(id, checked)
+
+                Result.Success(true)
             } catch (e: Exception) {
                 Result.Failed(e)
             }

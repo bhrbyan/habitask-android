@@ -22,7 +22,8 @@ fun TaskList(
                 taskName = task.name,
                 checked = checked,
                 onCheckedChange = {
-                    viewModel.onCheckComplete()
+                    checked = !checked
+                    viewModel.onCheck(task.id, checked)
                 }
             )
         }

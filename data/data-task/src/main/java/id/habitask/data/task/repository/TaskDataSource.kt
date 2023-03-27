@@ -7,5 +7,6 @@ interface TaskDataSource {
 
     suspend fun saveTask(task: Task): Result<Boolean>
     suspend fun getTasks(): Result<List<Task>>
+    suspend fun checkTask(id: Long, checked: Boolean): Result<Boolean>
 
 }

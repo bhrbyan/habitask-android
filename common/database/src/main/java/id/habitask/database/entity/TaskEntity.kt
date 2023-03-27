@@ -8,5 +8,6 @@ import androidx.room.PrimaryKey
 data class TaskEntity(
     @PrimaryKey(true) val id: Long = 0,
     @ColumnInfo(name = "name") val name: String,
-    @ColumnInfo(name = "category_id") val categoryId: Long
+    @ColumnInfo(name = "category_id") val categoryId: Long,
+    @ColumnInfo(name = "checked") val checked: Boolean
 )

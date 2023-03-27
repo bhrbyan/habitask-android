@@ -4,17 +4,20 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import id.habitask.data.task.model.Task
+import id.habitask.data.task.usecase.CheckTaskUseCase
 import id.habitask.data.task.usecase.GetTasksUseCase
 import id.habitask.network.state.Result
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class TaskListViewModel @Inject constructor(
-    private val getTasksUseCase: GetTasksUseCase
+    private val getTasksUseCase: GetTasksUseCase,
+    private val checkTaskUseCase: CheckTaskUseCase
 ) : ViewModel() {
 
     private val _viewState = MutableStateFlow(emptyList<Task>())
@@ -37,8 +40,22 @@ class TaskListViewModel @Inject constructor(
         }
     }
 
-    fun onCheckComplete() {
-        TODO("Not yet implemented")
+    fun onCheck(id: Long, check: Boolean) {
+        val checkedTask = _viewState.value.find { it.id == id }
+        val checkedTaskPosition = _viewState.value.indexOf(checkedTask)
+        val updatedTask = _viewState.value.drop(checkedTaskPosition)
+        viewModelScope.launch {
+            when (checkTaskUseCase.invoke(id, check)) {
+                is Result.Success -> {
+                    _viewState.update {
+                        updatedTask
+                    }
+                }
+                is Result.Failed -> {
+                    TODO()
+                }
+            }
+        }
     }
 
 }
