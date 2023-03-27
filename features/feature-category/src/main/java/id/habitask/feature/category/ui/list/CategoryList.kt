@@ -36,10 +36,10 @@ fun CategoryList(
 fun PreviewCategoryList() {
     CategoryList(
         categories = listOf(
-            Category("All", "", 0, true, false),
-            Category("Personal", "", 1, true, false),
-            Category("Work", "", 2, true, false),
-            Category("Others", "", 3, true, false),
+            Category("All", 0, true, false),
+            Category("Personal", 1, true, false),
+            Category("Work", 2, true, false),
+            Category("Others", 3, true, false),
         ),
         onUpdateVisibility = {}
     )

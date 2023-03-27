@@ -51,7 +51,7 @@ fun CategoryListItem(
 @Composable
 fun PreviewCategoryListItem() {
     CategoryListItem(
-        category = Category("All", "", 0, true),
+        category = Category("All", 0, true),
         onUpdateVisibility = {}
     )
 }

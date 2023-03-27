@@ -5,12 +5,15 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import id.habitask.database.dao.CategoryDao
+import id.habitask.database.dao.TaskDao
 import id.habitask.database.entity.CategoryEntity
+import id.habitask.database.entity.TaskEntity
 
-@Database(entities = [CategoryEntity::class], version = 1)
+@Database(entities = [CategoryEntity::class, TaskEntity::class], version = 1)
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun categoryDao(): CategoryDao
+    abstract fun taskDao(): TaskDao
 
     companion object {
         private const val DATABASE_NAME: String = "habitask.db"

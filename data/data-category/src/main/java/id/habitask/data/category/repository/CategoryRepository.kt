@@ -24,7 +24,7 @@ class CategoryRepository @Inject constructor(
                         categoryDao.getCategories().filter { it.visible }
                     }
                 }.map {
-                    Category(it.name, it.hexColor, it.position, it.visible, it.deletable, it.id)
+                    Category(it.name, it.position, it.visible, it.deletable, it.id)
                 }
 
                 Result.Success(categories)

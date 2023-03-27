@@ -29,10 +29,10 @@ fun CategoryTabList(
 fun PreviewCategoryTabList() {
     CategoryTabList(
         categories = listOf(
-            Category("All", "000000", 1, visible = true, deletable = false),
-            Category("Personal", "000000", 1, true),
-            Category("Work", "000000", 1, true),
-            Category("Others", "000000", 1, true)
+            Category("All", 1, visible = true, deletable = false),
+            Category("Personal", 1, true),
+            Category("Work", 1, true),
+            Category("Others", 1, true)
         )
     )
 }
