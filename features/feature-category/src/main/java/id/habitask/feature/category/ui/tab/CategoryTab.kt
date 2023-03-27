@@ -8,7 +8,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import id.habitask.feature.category.tab.CategoryTabList
 
 @Composable
-fun CategoryTabScreen(
+fun CategoryTab(
     modifier: Modifier = Modifier,
     taskListViewModel: CategoryTabViewModel = viewModel()
 ) {

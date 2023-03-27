@@ -8,8 +8,7 @@ import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class TaskRepository @Inject constructor(
-    private val taskDao: TaskDao,
-    private val dispatcher: AppDispatcher
+    private val taskDao: TaskDao, private val dispatcher: AppDispatcher
 ) : TaskDataSource {
 
     override suspend fun saveTask(task: Task): Result<Boolean> {
@@ -18,6 +17,20 @@ class TaskRepository @Inject constructor(
                 taskDao.saveTask(task.mapToEntity())
 
                 Result.Success(true)
+            } catch (e: Exception) {
+                Result.Failed(e)
+            }
+        }
+    }
+
+    override suspend fun getTasks(): Result<List<Task>> {
+        return withContext(dispatcher.io) {
+            try {
+                val tasks = taskDao.getTasks().map {
+                    Task(it.id, it.name, it.categoryId)
+                }
+
+                Result.Success(tasks)
             } catch (e: Exception) {
                 Result.Failed(e)
             }

@@ -9,8 +9,9 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import dagger.hilt.android.AndroidEntryPoint
-import id.habitask.feature.category.ui.tab.CategoryTabScreen
-import id.habitask.feature.task.bottomsheet.TaskBottomSheetFormScreen
+import id.habitask.feature.category.ui.tab.CategoryTab
+import id.habitask.feature.task.bottomsheet.TaskFormBottomSheet
+import id.habitask.feature.task.list.TaskList
 import id.habitask.ui.R
 import id.habitask.ui.appbar.TopAppBar
 import id.habitask.ui.bottomsheet.BottomSheet
@@ -33,11 +34,12 @@ class MainActivity : ComponentActivity() {
                             TopAppBar(
                                 title = R.string.app_name
                             )
-                            CategoryTabScreen()
+                            CategoryTab()
+                            TaskList()
                         }
                     },
                     sheetContent = {
-                        TaskBottomSheetFormScreen(
+                        TaskFormBottomSheet(
                             taskValue = taskValue,
                             onChangeTaskValue = {
                                 taskValue = it

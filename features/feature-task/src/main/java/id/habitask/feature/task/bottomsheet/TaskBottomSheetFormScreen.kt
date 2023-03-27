@@ -17,7 +17,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import id.habitask.ui.R
 
 @Composable
-fun TaskBottomSheetFormScreen(
+fun TaskFormBottomSheet(
     taskValue: String,
     onChangeTaskValue: (String) -> Unit,
     viewModel: TaskBottomSheetFormViewModel = viewModel()

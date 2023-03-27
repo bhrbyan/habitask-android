@@ -6,5 +6,6 @@ import id.habitask.network.state.Result
 interface TaskDataSource {
 
     suspend fun saveTask(task: Task): Result<Boolean>
+    suspend fun getTasks(): Result<List<Task>>
 
 }
