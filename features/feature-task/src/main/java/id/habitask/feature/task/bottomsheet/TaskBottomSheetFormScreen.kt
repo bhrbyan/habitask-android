@@ -24,6 +24,11 @@ fun TaskBottomSheetFormScreen(
 ) {
     val viewState = viewModel.viewState.collectAsState()
 
+    if (viewState.value) {
+        onChangeTaskValue("")
+        viewModel.resetState()
+    }
+
     Row(
         modifier = Modifier.padding(horizontal = 20.dp, vertical = 16.dp)
     ) {
@@ -31,14 +36,9 @@ fun TaskBottomSheetFormScreen(
             placeholder = {
                 Text(text = stringResource(R.string.task_bottom_sheet_placeholder))
             },
-            value = if (viewState.value) "" else taskValue,
+            value = taskValue,
             onValueChange = {
-                if (viewState.value) {
-                    onChangeTaskValue("")
-                    viewModel.resetState()
-                } else {
-                    onChangeTaskValue(it)
-                }
+                onChangeTaskValue(it)
             },
             modifier = Modifier
                 .weight(1f)
