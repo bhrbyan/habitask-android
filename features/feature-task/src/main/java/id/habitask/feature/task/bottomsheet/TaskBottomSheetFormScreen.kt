@@ -20,14 +20,14 @@ import id.habitask.ui.R
 fun TaskFormBottomSheet(
     viewModel: TaskBottomSheetFormViewModel = viewModel()
 ) {
-    var taskValue by rememberSaveable {
+    var taskInputTextValue by rememberSaveable {
         mutableStateOf("")
     }
 
     val viewState = viewModel.viewState.collectAsState()
 
     if (viewState.value) {
-        taskValue = ""
+        taskInputTextValue = ""
         viewModel.resetState()
     }
 
@@ -38,9 +38,9 @@ fun TaskFormBottomSheet(
             placeholder = {
                 Text(text = stringResource(R.string.task_bottom_sheet_placeholder))
             },
-            value = taskValue,
+            value = taskInputTextValue,
             onValueChange = {
-                taskValue = it
+                taskInputTextValue = it
             },
             modifier = Modifier
                 .weight(1f)
@@ -48,13 +48,13 @@ fun TaskFormBottomSheet(
             shape = CircleShape
         )
         FloatingActionButton(
-            backgroundColor = if (taskValue.isEmpty())
+            backgroundColor = if (taskInputTextValue.isEmpty())
                 Color.LightGray
             else
                 MaterialTheme.colors.secondary,
             onClick = {
-                if (taskValue.isNotEmpty()) {
-                    viewModel.saveTask(taskValue)
+                if (taskInputTextValue.isNotEmpty()) {
+                    viewModel.saveTask(taskInputTextValue)
                 }
             }
         ) {
