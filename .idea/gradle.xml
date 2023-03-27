@@ -19,6 +19,7 @@
             <option value="$PROJECT_DIR$/common/ui" />
             <option value="$PROJECT_DIR$/data" />
             <option value="$PROJECT_DIR$/data/data-category" />
+            <option value="$PROJECT_DIR$/data/data-task" />
             <option value="$PROJECT_DIR$/features" />
             <option value="$PROJECT_DIR$/features/feature-category" />
             <option value="$PROJECT_DIR$/features/feature-task" />
