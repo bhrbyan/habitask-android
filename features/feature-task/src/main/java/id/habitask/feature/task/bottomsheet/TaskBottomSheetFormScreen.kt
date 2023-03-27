@@ -7,8 +7,8 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Send
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.*
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
@@ -18,14 +18,16 @@ import id.habitask.ui.R
 
 @Composable
 fun TaskFormBottomSheet(
-    taskValue: String,
-    onChangeTaskValue: (String) -> Unit,
     viewModel: TaskBottomSheetFormViewModel = viewModel()
 ) {
+    var taskValue by rememberSaveable {
+        mutableStateOf("")
+    }
+
     val viewState = viewModel.viewState.collectAsState()
 
     if (viewState.value) {
-        onChangeTaskValue("")
+        taskValue = ""
         viewModel.resetState()
     }
 
@@ -38,7 +40,7 @@ fun TaskFormBottomSheet(
             },
             value = taskValue,
             onValueChange = {
-                onChangeTaskValue(it)
+                taskValue = it
             },
             modifier = Modifier
                 .weight(1f)

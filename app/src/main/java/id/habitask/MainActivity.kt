@@ -4,10 +4,6 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Column
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
 import dagger.hilt.android.AndroidEntryPoint
 import id.habitask.feature.category.ui.tab.CategoryTab
 import id.habitask.feature.task.bottomsheet.TaskFormBottomSheet
@@ -24,10 +20,6 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             HabitaskTheme {
-                var taskValue by rememberSaveable {
-                    mutableStateOf("")
-                }
-
                 BottomSheet(
                     screenContent = {
                         Column {
@@ -39,12 +31,7 @@ class MainActivity : ComponentActivity() {
                         }
                     },
                     sheetContent = {
-                        TaskFormBottomSheet(
-                            taskValue = taskValue,
-                            onChangeTaskValue = {
-                                taskValue = it
-                            }
-                        )
+                        TaskFormBottomSheet()
                     }
                 )
             }
