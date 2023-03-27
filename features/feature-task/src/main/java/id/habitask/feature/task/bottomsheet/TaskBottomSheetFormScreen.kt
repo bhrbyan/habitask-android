@@ -8,6 +8,7 @@ import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Send
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
@@ -21,6 +22,8 @@ fun TaskBottomSheetFormScreen(
     onChangeTaskValue: (String) -> Unit,
     viewModel: TaskBottomSheetFormViewModel = viewModel()
 ) {
+    val viewState = viewModel.viewState.collectAsState()
+
     Row(
         modifier = Modifier.padding(horizontal = 20.dp, vertical = 16.dp)
     ) {
@@ -28,9 +31,14 @@ fun TaskBottomSheetFormScreen(
             placeholder = {
                 Text(text = stringResource(R.string.task_bottom_sheet_placeholder))
             },
-            value = taskValue,
+            value = if (viewState.value) "" else taskValue,
             onValueChange = {
-                onChangeTaskValue(it)
+                if (viewState.value) {
+                    onChangeTaskValue("")
+                    viewModel.resetState()
+                } else {
+                    onChangeTaskValue(it)
+                }
             },
             modifier = Modifier
                 .weight(1f)

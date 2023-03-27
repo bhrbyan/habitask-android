@@ -1,9 +1,9 @@
 plugins {
     id 'com.android.library'
     id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
 
     /* Hilt */
-    id 'kotlin-kapt'
     id 'com.google.dagger.hilt.android'
 }
 
@@ -46,6 +46,7 @@ dependencies {
     implementation project(":common:network")
     implementation project(":common:storage")
     implementation project(":data:data-category")
+    implementation project(":data:data-task")
     implementation project(":features:feature-category")
 
     /* Hilt */
