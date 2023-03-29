@@ -30,6 +30,7 @@ class TaskRepository @Inject constructor(
                 val tasks = taskDao.getTasks()
                     .filter {
                         when (taskStatus) {
+                            TaskStatus.All -> it.checked.not() || it.checked
                             TaskStatus.Checked -> it.checked
                             TaskStatus.Unchecked -> it.checked.not()
                         }
@@ -37,6 +38,7 @@ class TaskRepository @Inject constructor(
                     .map {
                         Task(it.id, it.name, it.categoryId, it.checked)
                     }
+                    .sortedBy { it.checked }
 
                 Result.Success(tasks)
             } catch (e: Exception) {

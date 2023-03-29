@@ -30,7 +30,7 @@ class TaskListViewModel @Inject constructor(
 
     private fun getTasks() {
         viewModelScope.launch {
-            when (val result = getTasksUseCase.invoke(TaskStatus.Unchecked)) {
+            when (val result = getTasksUseCase.invoke(TaskStatus.All)) {
                 is Result.Success -> {
                     _viewState.value = TaskListViewState(result.data)
                 }

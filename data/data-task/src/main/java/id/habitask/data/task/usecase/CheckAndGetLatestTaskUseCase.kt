@@ -14,7 +14,7 @@ class CheckAndGetLatestTaskUseCase @Inject constructor(
     suspend operator fun invoke(id: Long, completed: Boolean): Result<List<Task>> {
         val result = when (taskRepository.checkTask(id, completed)) {
             is Result.Success -> {
-                getTasksUseCase.invoke(TaskStatus.Unchecked)
+                getTasksUseCase.invoke(TaskStatus.All)
             }
             is Result.Failed -> {
                 Result.Failed(Exception())

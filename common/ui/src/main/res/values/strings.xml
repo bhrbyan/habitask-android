@@ -5,4 +5,9 @@
 
   <!-- Task Bottom Sheet -->
   <string name="task_bottom_sheet_placeholder">Add Task</string>
+
+  <!-- Task List -->
+  <string name="task_list_caption">List</string>
+  <string name="task_list_complete_caption">Complete</string>
+  <string name="task_list_upcoming_caption">Upcoming</string>
 </resources>
