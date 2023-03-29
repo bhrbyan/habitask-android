@@ -4,8 +4,10 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.*
+import androidx.compose.material.Checkbox
+import androidx.compose.material.CheckboxDefaults
+import androidx.compose.material.Divider
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -20,35 +22,28 @@ fun TaskListItem(
     onCheckedTask: (Boolean) -> Unit,
     modifier: Modifier = Modifier
 ) {
-    Card(
-        shape = CircleShape,
-        modifier = modifier
-            .fillMaxWidth()
-            .padding(horizontal = 20.dp, vertical = 4.dp)
-    ) {
-        Box {
-            if (checked) {
-                Divider(
-                    Modifier
-                        .padding(horizontal = 20.dp)
-                        .align(Alignment.Center),
-                    thickness = 2.dp
-                )
-            }
+    Box(modifier = modifier.fillMaxWidth()) {
+        if (checked) {
+            Divider(
+                Modifier
+                    .padding(horizontal = 20.dp)
+                    .align(Alignment.Center),
+                thickness = 2.dp
+            )
+        }
 
-            Row(verticalAlignment = Alignment.CenterVertically) {
-                Checkbox(
-                    checked = checked,
-                    onCheckedChange = {
-                        onCheckedTask(it)
-                    },
-                    colors = if (checked) CheckboxDefaults.colors(checkedColor = Color.LightGray) else CheckboxDefaults.colors()
-                )
-                Text(
-                    text = taskName,
-                    color = if (checked) Color.LightGray else Color.Unspecified
-                )
-            }
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            Checkbox(
+                checked = checked,
+                onCheckedChange = {
+                    onCheckedTask(it)
+                },
+                colors = if (checked) CheckboxDefaults.colors(checkedColor = Color.LightGray) else CheckboxDefaults.colors()
+            )
+            Text(
+                text = taskName,
+                color = if (checked) Color.LightGray else Color.Unspecified
+            )
         }
     }
 }
